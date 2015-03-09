@@ -1,25 +1,18 @@
 %option noyywrap
 %{
-#include <iostream>
+
 #include "Parserbase.h"
-using namespace std;
+
 %}
 
-NUM 			[0-9]+
-SUB			-
-ADD			+
-MULT			*
-DIV			/ 
-EOL			\;
+NUM 		[0-9]+
+STR		\"(\\.|[^\\"])*\"
 
 %%
 
 {NUM}		return ParserBase::NUM;
-{SUB}		return ParserBase::SUB;
-{ADD}		return ParserBase::ADD;
-{MULT}		return ParserBase::MULT;
-{DIV}		return ParserBase::DIV;
-{EOL}		return ParserBase::EOL;
+{STR}		return ParserBase::STR;
+
 
 %%
 

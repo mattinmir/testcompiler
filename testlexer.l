@@ -6,11 +6,11 @@ using namespace std;
 %}
 
 NUM 			[0-9]+
-SUB				-
-ADD				+
+SUB			-
+ADD			+
 MULT			*
-DIV				/ 
-
+DIV			/ 
+EOL			\;
 
 %%
 
@@ -19,8 +19,7 @@ DIV				/
 {ADD}		return ParserBase::ADD;
 {MULT}		return ParserBase::MULT;
 {DIV}		return ParserBase::DIV;
-";"			return ParserBase::EOL;
-.			;
+{EOL}		return ParserBase::EOL;
 
 %%
 

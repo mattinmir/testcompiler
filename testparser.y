@@ -1,13 +1,17 @@
-%token NUM SUB ADD MULT DIV EOL
+%token NUM STR
+%stype std::string
+%%
+
+thing 	: num {std::cout << "Thing is: " << $1 << std::endl;}
+	| str {std::cout << "Thing is: " << $1 << std::endl;}
+	;
+
+num	: NUM {$$ = $1;}
+	;
+
+str	: STR {$$ = lexer.YYText();}
+	;	
 
 %%
 
-line	: expr EOL  {cout << $1 << endl;}
-		;
-
-expr	: NUM ADD expr 	{$$ = $1 + $3}
-		| NUM SUB expr 	{$$ = $1 - $3}
-		| NUM MULT expr {$$ = $1 * $3}
-		| NUM DIV expr 	{$$ = $1 / $3}
-		| NUM			{$$ = $1}
-		;
+using namespace std;

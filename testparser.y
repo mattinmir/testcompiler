@@ -1,17 +1,31 @@
 %token NUM STR
-%stype std::string
+%{
+#include <iostream>
+using namespace std;
+int yylex();
+
+%}
+%type <string> thing
+%type <string> num
+%type <string> str
 %%
 
-thing 	: num {std::cout << "Thing is: " << $1 << std::endl;}
-	| str {std::cout << "Thing is: " << $1 << std::endl;}
+thing 	: num {cout << "Thing is: " << $1 << endl;}
+	| str {cout << "Thing is: " << $1 << endl;}
 	;
 
 num	: NUM {$$ = $1;}
 	;
 
-str	: STR {$$ = lexer.YYText();}
+str	: STR {$$ = yytext;}
 	;	
 
 %%
 
-using namespace std;
+int main()
+{
+
+    yyparse();
+
+    return 0;
+}

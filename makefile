@@ -1,11 +1,11 @@
-all:  parse.cc lex.yy.cc
-	g++  parse.cc lex.yy.cc -o calc
+all:  testparser.tab.cc lex.yy.cc
+	g++  testparser.tab.cc lex.yy.cc -o calc
 
-parse.cc:
-	bisonc++ testparser.y
+testparser.tab.hh testparser.tab.cc:
+	bison -d testparser.y -o testparser.tab.cc
 
-lex.yy.cc:
-	flex++ testlexer.l
+lex.yy.cc: testparser.tab.hh
+	flex --outfile='lex.yy.cc' testlexer.l
 
 clean:
-	rm lex.yy.cc Parserbase.h parse.cc
+	rm lex.yy.cc testparser.tab.cc

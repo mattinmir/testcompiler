@@ -1,7 +1,9 @@
 %option noyywrap
 %{
 
-#include "Parserbase.h"
+#include "testparser.tab.hh"
+#include <iostream>
+using namespace std;
 
 %}
 
@@ -10,16 +12,9 @@ STR		\"(\\.|[^\\"])*\"
 
 %%
 
-{NUM}		return ParserBase::NUM;
-{STR}		return ParserBase::STR;
+{NUM}		cout << "NUM"; return NUM;
+{STR}		cout << "STR"; return STR;
 
 
 %%
 
-int main()
-{
-    yyFlexLexer lexer;
-    while(lexer.yylex() != 0);
-
-    return 0;
-}
